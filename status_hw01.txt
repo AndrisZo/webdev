@@ -2,19 +2,26 @@ Please fill in answers to the questions below:
 
 
 1. What's your name?
-
+Andris Zonies
 
 2. Which VPS & domain providers did you choose?
-
+I chose namecheap and vultr
 
 3. What domain name did you register?
-
+I registered physicalmod.com
 
 4. What's the URL of your Github repository for this assignment?
-
+https://github.com/AndrisZo/webdev
 
 5. Which parts of this assignment did you have trouble with, if any?
-
+I had the most problem with the ssh process because I didn't understand how it worked and initially
+generated my ssh keys on my local machine, then tried to ssh in with my virtual machine. I couldn't understand
+why the connection was being refused, and spent quite a bit of time trying to figure out how to get it
+to ask for my ssh key before eventually realizing that I would need to change the ssh key to one I had 
+generated on my linux VM. Everything after that moved a bit smoother as I could follow the class notes fairly 
+well, but it took a while for me to just process what I was doing and understand how everything was working, 
+which is why I'm turning in a little late. I think the extra time was worth it however because I now feel like
+I understand everything I've done fairly well. 
 
 
 And here's a list of tasks for grading comments. Just leave this here:
