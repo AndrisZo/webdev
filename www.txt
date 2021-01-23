@@ -1,0 +1,14 @@
+server {
+	listen 80;
+	listen [::]:80;
+
+	root /home/andris/www/main;
+
+	index index.html;
+
+	server_name physicalmod.com www.physicalmod.com;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
