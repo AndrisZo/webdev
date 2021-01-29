@@ -6,7 +6,7 @@ server {
 
 	index index.html animal.html calc.html;
 
-	server_name hw02.physicalmod.com hw02.physicalmod.com/penguins hw02.physicalmod.com/calculator;
+	server_name hw02.physicalmod.com;
 
 	location / {
 		try_files $uri $uri/ =404;
