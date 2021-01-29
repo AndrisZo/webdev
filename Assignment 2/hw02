@@ -4,7 +4,7 @@ server {
 
 	root /home/andris/hw02/main;
 
-	index index.html;
+	index index.html animal.html calc.html;
 
 	server_name hw02.physicalmod.com hw02.physicalmod.com/penguins hw02.physicalmod.com/calculator;
 
