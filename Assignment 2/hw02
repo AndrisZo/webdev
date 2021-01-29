@@ -1,0 +1,14 @@
+server {
+	listen 80;
+	listen [::]:80;
+
+	root /home/andris/hw02/main;
+
+	index index.html;
+
+	server_name hw02.physicalmod.com hw02.physicalmod.com/penguins hw02.physicalmod.com/calculator;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}

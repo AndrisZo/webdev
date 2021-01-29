@@ -1,0 +1,48 @@
+Please fill in answers to the questions below:
+
+1. What's your name?
+Andris Zonies
+
+2. What hostname did you deploy to?
+hw02.physicalmod.com
+
+3. What's the link to your repository on github with your code?
+https://github.com/AndrisZo/webdev
+
+4. How many HTML / CSS tutorial exercises did you do?
+None
+
+5. How comfortable do you feel with HTML and CSS now?
+Pretty comfortable: I was part of a web dev project last semester so I'm relatively comfortable
+with HTML and CSS because I have some previous experience with it.
+
+6. How many JS tutorial exercises did you do?
+None
+
+7. How comfortable do you feel with JS now?
+Fairly comfortable, again from previous experience. I still need to get used to 
+using functional organization across large code bases, but I feel comfortable enough 
+that I can write code with occasional references to documentation.
+
+8. Do all of your HTML pages pass the W3C HTML validator?
+(https://validator.w3.org/)
+When I first checked, I had an issue with the image tag in hw01 
+because my image tag didn't have alternative text, and it was formatted as
+ <image src="" /> when it should have been formatted as <img src="" alt=""> .
+I fixed that, and now they all pass.
+
+9. Which parts of this assignment did you have trouble with, if any?
+I took probably longer than I needed to on the calculator trying to make it look
+decent, but I learned a lot about CSS along the way so that's okay. Overall
+I thought it was okay.
+
+
+And here's a list of tasks for grading comments. Just leave this here:
+ - Task 1
+ - Task 2
+ - Task 3
+ - Task 4
+ - Task 5
+ - Task 6
+ - Task 7
+ - Task 8

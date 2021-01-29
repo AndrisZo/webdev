@@ -1,0 +1,45 @@
+#p {
+    color: rgb(0, 128, 255);
+}
+#e {
+    color: rgb(0, 174, 255);
+}
+#n1 {
+    color: rgb(153, 0, 255);
+}
+#g {
+    color: rgb(0, 132, 150);
+}
+#u {
+    color: rgb(84, 0, 140);
+}
+#i {
+    color: rgb(135, 0, 189);
+}
+#n2 {
+    color: rgb(0, 51, 218);
+}
+#s {
+    color: rgb(0, 191, 224);
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    text-align: center;
+}
+
+#Skipper {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
