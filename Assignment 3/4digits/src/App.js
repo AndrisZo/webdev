@@ -2,13 +2,16 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const win = "win"
+  const lose = "lose"
+  const guessing = "guessing"
+  const maxGuesses = 8;
+
   let [text, setText] = useState("")
   let [digits, setDigits] = useState(generateDigits())
   let [guesses, setGuesses] = useState([])
   let [feedback, setFeedback] = useState("")
-
-  const maxGuesses = 8;
-
+  let [gamestate, setGamestate] = useState(guessing)
 
   function generateDigits() {
     let validDigits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -41,13 +44,26 @@ function App() {
 
   function makeGuess() {
     if (text.length === 4 && isAllUnique(text)) {
-      console.log("Made guess: " + text)
       guesses.push(text)
       setGuesses(guesses)
       setText("")
       resetFeedback()
+      updateGamestate()
     } else {
       setFeedback("Guesses must be 4 unique numbers")
+    }
+  }
+
+  function updateGamestate() {
+    let thing = guesses[guesses.length - 1]
+    console.log("Thing: " + String(thing))
+    console.log("Digits: " + String(digits.join('')))
+    if (guesses[guesses.length - 1] == digits.join('')) {
+      console.log("Set gamestate to win")
+      setGamestate(win)
+    } else if (guesses.length >= 8) {
+      console.log("Set gamestate to lose")
+      setGamestate(lose)
     }
   }
 
@@ -57,7 +73,6 @@ function App() {
     let j = 0;
     for (i = 0; i < splitguess.length - 1; i++) {
       for (j = i + 1; j < splitguess.length; j++) {
-        console.log("Comparing " + splitguess[i] + " with " + splitguess[j])
         if (splitguess[i] === splitguess[j]) {
           return false
         }
@@ -71,11 +86,16 @@ function App() {
     setText("")
     setGuesses([])
     setFeedback("")
+    setGamestate(guessing)
   }
 
   function RenderGuesses() {
-    console.log("Current guesses: " + String(guesses))
-    let tablerows = []
+    let tablerows = [
+      <tr>
+        <th>Guess</th>
+        <th>Bulls</th>
+        <th>Cows</th>
+      </tr>]
     let i = 0;
     for (i = 0; i < maxGuesses; i++) {
       if (i < guesses.length) {
@@ -98,7 +118,7 @@ function App() {
       }
     }
 
-    return tablerows
+    return <table>{tablerows}</table>
   }
 
   function countBullsCows(guess) {
@@ -116,21 +136,50 @@ function App() {
     return [bulls, cows]
   }
 
+  function ResetButton() {
+    return <button onClick={resetGame}> Reset </button>
+  }
+
+  let body = <p>Gamestate unknown</p>;
+
+  if (gamestate === lose) {
+    body = (
+      <div>
+        <h1>You lose!</h1>
+        <p>The secret digits were {digits}</p>
+        <ResetButton />
+        <RenderGuesses />
+      </div>
+    )
+  } else if (gamestate === win) {
+    let isPlural = 'es'
+    if (guesses.length <= 1) {
+      isPlural = ''
+    }
+    body = (
+      <div>
+        <h1>You won in {guesses.length} guess{isPlural}!</h1>
+        <p>The secret digits were {digits}</p>
+        <ResetButton />
+        <RenderGuesses />
+      </div>
+    )
+  } else if (gamestate === guessing) {
+    body = (
+      <div>
+        <h1>4 digits</h1>
+        <p>{digits}</p>
+        <input type="text" value={text} onChange={updateText} onKeyPress={keyPress} />
+        <p><ResetButton /></p>
+        <p>{feedback}</p>
+        <RenderGuesses />
+      </div>
+    )
+  }
 
   return (
     <div className="App">
-      <p>{digits}</p>
-      <input type="text" value={text} onChange={updateText} onKeyPress={keyPress}/>
-      <p><button onClick={resetGame}> Reset </button></p>
-      <p>{feedback}</p>
-      <table>
-        <tr>
-          <th>Guess</th>
-          <th>Bulls</th>
-          <th>Cows</th>
-        </tr>
-        <RenderGuesses />
-      </table>
+      {body}
     </div>
   );
 }
