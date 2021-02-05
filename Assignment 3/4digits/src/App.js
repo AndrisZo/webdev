@@ -92,9 +92,9 @@ function App() {
   function RenderGuesses() {
     let tablerows = [
       <tr>
-        <th>Guess</th>
-        <th>Bulls</th>
-        <th>Cows</th>
+        <th className="tableheader">Guess</th>
+        <th className="tableheader">Bulls</th>
+        <th className="tableheader">Cows</th>
       </tr>]
     let i = 0;
     for (i = 0; i < maxGuesses; i++) {
@@ -102,23 +102,23 @@ function App() {
         let [bulls, cows] = countBullsCows(guesses[i])
         tablerows.push(
           <tr>
-            <td>{guesses[i]}</td>
-            <td>{bulls}</td>
-            <td>{cows}</td>
+            <td className="guess">{guesses[i]}</td>
+            <td className="bulls">{bulls}</td>
+            <td className="cows">{cows}</td>
           </tr>
         )
       } else {
         tablerows.push(
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td className="guess"></td>
+            <td className="bulls"></td>
+            <td className="cows"></td>
           </tr>
         )
       }
     }
 
-    return <table>{tablerows}</table>
+    return <table className="guesstable">{tablerows}</table>
   }
 
   function countBullsCows(guess) {
@@ -168,7 +168,6 @@ function App() {
     body = (
       <div>
         <h1>4 digits</h1>
-        <p>{digits}</p>
         <input type="text" value={text} onChange={updateText} onKeyPress={keyPress} />
         <p><ResetButton /></p>
         <p>{feedback}</p>
