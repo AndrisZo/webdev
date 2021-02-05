@@ -16,7 +16,7 @@ function App() {
   function generateDigits() {
     let validDigits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     let output = []
-    let i = 0;
+    let i;
     let temp;
     for (i = 0; i < 4; i++) {
       temp = Math.floor(Math.random() * validDigits.length)
@@ -26,12 +26,14 @@ function App() {
     return output
   }
 
+    // Based on updateText function from hangman in class
   function updateText(ev) {
     if (!isNaN(ev.target.value) && ev.target.value.length < 5) {
       setText(ev.target.value)
     }
   }
 
+  // Based on keyPress function from hangman in class
   function keyPress(ev) {
     if (ev.key === "Enter") {
       makeGuess()
@@ -139,6 +141,14 @@ function App() {
   function ResetButton() {
     return <button onClick={resetGame}> Reset </button>
   }
+  
+  function GuessButton() {
+    return <button onClick={makeGuess}> Guess </button>
+  }
+
+  function RenderFeedback() {
+    return <p className="feedback">{feedback}</p>
+  }
 
   let body = <p>Gamestate unknown</p>;
 
@@ -168,10 +178,13 @@ function App() {
     body = (
       <div>
         <h1>4 digits</h1>
-        <input type="text" value={text} onChange={updateText} onKeyPress={keyPress} />
-        <p><ResetButton /></p>
-        <p>{feedback}</p>
+        <p>
+          <input type="text" value={text} onChange={updateText} onKeyPress={keyPress} />
+          <GuessButton />
+        </p>
+        <RenderFeedback />
         <RenderGuesses />
+        <ResetButton />
       </div>
     )
   }
