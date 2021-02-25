@@ -1,4 +1,4 @@
-"""
+_ = """
 {
   guesses: [
       [Username, [1, 2, 3, 4], bulls, cows],
@@ -18,7 +18,7 @@
       Username : [win, loss],
       Username : [win, loss],
   }
-  players-ready: [Username, Username]
+  playersready: [Username, Username]
   turnnumber: integer
   setup: boolean
 }
@@ -36,48 +36,52 @@ Calls the user can make to the server:
 - "ping"
 """
 
-defmodule Multibulls do
+defmodule Multibulls.Game do
   def makeguess(gamestate, name, guess) do
     if isValidGuess(guess) do
-      gamestate = Map.put(gamestate, :currentguesses, Map.put(gamestate.currentguesses.put(name, guess)))
+      gamestate = Map.put(gamestate, :currentguesses, Map.put(gamestate.currentguesses, name, guess))
       Map.put(gamestate, :passed, List.delete(gamestate.passed, name))
+      # if allplayersguessed(gamestate) do
+        # pushguesses(gamestate)
+      # else do
+        # gamestate
     end
   end
 
   def isValidGuess(guess) do
-    Enum.uniq(guess) == guess
+    Enum.count(guess) == 4 and Enum.count(Enum.uniq(guess)) == 4
   end
 
   def allplayersguessed(gamestate) do
-    Enum.sort(Enum.concat(Map.keys(gamestate.playerswinloss), gamestate.passed)) == Enum.sort(gamestate.currentguesses.keys())
+    Enum.sort(Enum.concat(Map.keys(gamestate.currentguesses), gamestate.passed)) == Enum.sort(Map.keys(gamestate.playerswinloss))
   end
 
-  def pushguesses(gamestate) do
+  #def pushguesses(gamestate) do
     # Take all the guesses out, store them with their usernames
     # Get the cows and bulls for every guess
     # Add all of that to the guesses array in the proper format
     # Reset current guesses to an empty array
-  end
+  #end
 
   def pass(gamestate, name) do
     gamestate = Map.put(gamestate, :passed, [name | gamestate.passed])
-    Map.put(gamestate, :currentguesses, Map.drop(gamestate.currentgueses, [name]))
+    Map.put(gamestate, :currentguesses, Map.drop(gamestate.currentgueses, name))
   end
 
-  def addplayer(gamestate, name) do
-
+  def addplayer(gamestate, name, winloss) do
+    Map.put(gamestate, :playerswinloss, Map.put(gamestate.playerswinloss, name, winloss))
   end
 
   def removeplayer(gamestate, name) do
-
+    Map.drop(gamestate.playerswinloss, name)
   end
 
   def readyplayer(gamestate, name) do
-    Map.put(gamestate, :players-ready, [name | gamestate.players-ready])
+    Map.put(gamestate, :playersready, [name | gamestate.playersready])
   end
 
   def unreadyplayer(gamestate, name) do
-
+    Map.put(gamestate, :playersready, List.delete(gamestate.playersready, name))
   end
 
     # Create a random list of 4 digits
@@ -114,5 +118,4 @@ defmodule Multibulls do
       true -> cows_bulls(tl(guessrem), tl(digitsrem), digits, cows, bulls)
     end
   end
-
 end
